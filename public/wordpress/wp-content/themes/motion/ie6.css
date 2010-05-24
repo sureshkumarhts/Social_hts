@@ -1,0 +1,27 @@
+#top #topmenu li a.rss {background:none; padding-left:0;}
+
+#nav li ul {display:none;}
+#nav li {background:none;}
+
+#header #headerbanner {padding:10px 10px 0 10px;}
+#header #headerbanner a:hover {background:none; color:#fff;}
+
+.sticky {padding:0; margin-bottom:35px; background:none;}
+.postmetatop .categs {background:none; padding-left:0;}
+.postmetatop .date span {background:none; padding-left:0;}
+.postcontent a:hover {background:none; color:#fff;}
+.postmetabottom {padding:10px 10px 0 10px;}
+.postmetabottom .tags {background:none; padding-left:0;}
+.postmetabottom .readmore span {background:none; padding-left:0;}
+#navigation a:hover {background:none; color:#fff;}
+
+#sidebar ul ul li {margin-bottom:10px;}
+#sidebar ul ul li a {display:inline; padding:5px 0;}
+#sidebar ul ul li a:hover {display:inline; background:none; color:#fff;}
+
+#footer ul li {padding:5px; background:none;}
+#footer ul ul li {background:none; padding-left:0; margin:5px 0;}
+#footer li a {display:inline; padding:5px 0;}
+#footer li a:hover {display:inline; background:none; color:#fff;}
+#credits a:hover {background:none; color:#fff;}
+

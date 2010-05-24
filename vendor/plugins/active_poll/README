@@ -1,0 +1,57 @@
+ActivePoll Plugin v1.0
+======================
+
+This plugin allows polls, integrated with your user model, within your application.
+
+Install plugin
+  * Run the following command:
+
+  ./script/plugin install http://active-poll.googlecode.com/svn/trunk/active_poll
+
+    This command will download the plugin code and run a script. The script will prompt you which is the name of the model you want to associate with a user vote (tipically the user model). . Otherwise, you just can press ENTER, telling the plugin that you don't want to assosiate a model, this way, the plugin would not be able to track which users made the votes for a particular poll.
+
+  * Next, run the generator command (which generates model fields & migration files):
+
+  ./script/generate active_poll
+
+  * Update the database, populate the database with the ActivePoll tables: 
+
+  rake db:migrate 
+
+Create poll
+
+  * To create a poll use the following command:
+
+  ./script/runner vendor/plugins/active_poll/create_poll.rb
+
+  The script will ask you which are the answers, which is the questions displayed, among other configurations (allows multiple selection, who is allowed to vote: registered users, anonymous, etc.) for the poll.
+
+Show poll in views
+
+   * Insert the active_poll helper in your view:
+
+      #someview.rhtml (where you want to show the poll)
+      ..
+      <%= active_poll ( poll_name, { :in_place => true, :redirect_to => some_url, :view_dir => view_directory } ) %>
+      ..
+
+      Where:
+
+          * poll_name. This is the name that identifies the poll to display. This is the only required parameter.
+          * :in_place. Enables AJAX functionality to the poll if it is set to true, otherwise the hole page would be reload while submitting a vote.
+          * :redirect_to. This is an url to redirect after the vote.
+          * :view_dir. If present, it loads the poll pages (show_poll, already_vote, user_not_logged, etc) from the directory set by this parameter. Otherwise, all the active_poll pages would be take from the views directory inside the active_poll plugin's folder.
+
+   * Insert act_as_vote_handler statement in the controller of the view (where the active_poll helper is used):
+
+      class SomeController
+        
+         acts_as_vote_handler
+        
+        ..
+      end
+
+More Information, improvment & comments
+
+For more information you can visit the following page: http://railshotspot.blogspot.com/2008/01/activepoll-plugin.html
+If you have any comments, questions, and/or suggestions please don’t hesitate to send me an email active.poll@gmail.com

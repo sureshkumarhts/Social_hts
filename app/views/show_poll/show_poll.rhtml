@@ -1,0 +1,122 @@
+<%#
+Copyright 2009 Timothy Fisher
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+%>
+<%= stylesheet_link_tag 'groups' %>
+<%= stylesheet_link_tag 'common' %>
+<%= stylesheet_link_tag 'forum' %>
+<%= stylesheet_link_tag 'events' %>
+	
+<div class="column_1">
+	<span class="group_title"><%= @group.name %></span>
+	<div class="module">
+		<div class="module_head">
+			Information
+			<div class="head_links">
+			</div>
+		</div>
+		<div class="module_body">
+			<div id="group_photo">
+				<% if (@group.profile_photo) %>
+					<%= image_tag(@group.profile_photo.public_filename()) %>
+				<% else %>
+					No Photo
+				<% end %>
+			</div>
+			<div id="group_description">
+				<%= @group.description %>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+	<%= render :partial => 'groups/announcements_widget' %>
+	<%= render :partial => 'shared/wall_posts_widget', :locals=>{:parent=>@group} %>
+        <div>
+   <div class="module_head">Forum</div>
+   <div>Topics</div>
+   
+     <div id="topic_header">
+		<div class="topic_title">Forum</div>
+		<div class="topic_threads">Threads</div>
+		<div class="topic_posts">Posts</div>
+		<div class="topic_last_post">Last Post</div>
+	</div>
+	<% @group.forum_topics.each do |topic| %>
+		<div class="a_topic">
+			<div class="topic_title"><%= link_to topic.title, forum_topic_forum_posts_path(topic) %></div><br/>
+			<div class="topic_desc"><%= topic.description %></div>
+			<div class="topic_threads"><%= topic.forum_threads.length %></div>
+			<div class="topic_posts"><%= topic.forum_posts.length %></div>
+			<% if topic.forum_posts.length != 0 %>
+				<% last_post = topic.forum_posts[0] %>
+				<div class="topic_last_post">
+					<%= link_to last_post.title, forum_post_path(last_post) %><br/>
+					posted by <%= last_post.user.name %><br/>
+					<%= last_post.created_at %>
+				</div>
+			<% else %>
+				<div class="topic_last_post">No Posts</div>
+			<% end %>
+		</div>
+     <%end%>
+  
+   <div>  <% if logged_in? %>
+      <% if @group.users.include?(current_user) %><%= link_to 'Create New Topic', :controller => 'groups', :action => 'new_forum_topic', :id => @group.id%>
+    <%end%><%end%></div>
+   <br>
+</div>
+
+        <div>
+           <div class="module_head">Events</div>
+           <div id="events_table">
+	<% for event in @group.events %>
+		<%= render :partial => '/events/event_brief', :locals=>{:event=>event} %>
+	<% end %>
+</div>
+
+           <div> <%= active_poll ( "Ruby Growth", { :in_place => true, :redirect_to => "some_url", :view_dir => "view_directory" } ) %>
+</div>
+      
+ <div>
+      <% if logged_in? %>
+      <% if @group.users.include?(current_user) %><%= link_to 'Create New Events', :controller => 'events', :action => 'new', :id => @group.id%>
+ <%end%><%end%></div>
+        </div>
+
+</div>
+<div class="column_2">
+  <div class="module">
+    <% if logged_in? %>
+      <% unless @group.users.include?(current_user) %>
+        <%unless @group.private?%>
+          <% form_for(:membership, :url => memberships_path(:user_id => current_user.id, :group_id => @group.id)) do |f| %>
+            <%= submit_tag "Join Group" %>
+          <% end %>
+        <%else%>
+          <% form_for(:membership, :url => private_group_path(:user_id => current_user.id, :group_id => @group.id)) do |f| %>
+            <%= submit_tag "Join Group" %>
+          <% end %>
+        <% end %>
+      <%end%>
+    <% end %>
+  </div>
+   <% unless @members.empty?  %>
+  <%= render :partial => 'members_widget' %>
+  <%end%>
+  <% if logged_in? && current_user.is_group_admin(@group) %>
+    <%= render :partial => 'group_admin_widget' %>
+  <% end %>
+</div>
+
+

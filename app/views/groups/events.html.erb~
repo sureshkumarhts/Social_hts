@@ -1,0 +1,45 @@
+
+<%= stylesheet_link_tag 'events' %>
+
+<table width="750px" >
+<tr>
+<td>
+<span class="group_title">Events</span>
+<%if !params[:group_id].nil?%>
+	<% for event in @group.events %>
+		<%= render :partial => '/events/event_brief', :locals=>{:event=>event,  :group_event => 'group_event' } %>
+	<% end %><br>
+	<% if @group.events.length == 0 %>
+		No Events exist.
+	<% end %>
+<br>
+<%else%>
+<div id ="event_show">
+	
+<div class="column_1">
+	<%= render :partial => '/events/event_details' %>
+	<div class="module">
+		<div class="module_head">Event Description</div>
+		<div class="module_body">
+			<%= @event.description %>
+		</div>
+	</div>
+	<%= render :partial => 'shared/wall_posts_widget', :locals=>{:parent=>@event} %>
+</div>
+<div class="column_2">
+	<% if (current_user && current_user.is_admin) || current_user == @event.user %>
+		<%= render :partial => '/events/event_admin_widget' %>
+	<% end %>
+	<%= render :partial => '/events/attendance_widget' %>
+</div>
+
+  </div>
+
+<%end%>
+</td>
+</tr>
+</table>
+
+
+
+

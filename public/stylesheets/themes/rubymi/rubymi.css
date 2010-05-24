@@ -1,0 +1,57 @@
+body {
+	background: url(/images/rubymi_bg2.gif);
+}
+
+#main {
+	background: #BED6E3 url(/images/xg-v3.gif) repeat-y;
+}
+
+#header {
+	background-image: url(/images/rubymi_header2.jpg);
+	height: 164px;
+}
+
+#content {
+	background: url(/images/xg-v3.gif) repeat-y;
+}
+
+#header #masthead {
+	height: 120px;
+}
+
+#footer {
+	background-color:#8c0600 !important;
+	color:#FFFFFF;
+	float:left;
+	padding:7px;
+	width:941px;
+}
+
+#footer img {
+	border: none;
+}
+
+#nav_list .nav_list_item a, #nav_list_right .nav_list_item a:visited {
+	color: white;
+}
+
+.current_menu {
+	background-color: #BED6E3;
+}
+
+.widget_content {
+	padding-bottom: 0px;
+}
+
+.column_2 {
+	float: left;
+	padding:0 5px;
+	width:490px;
+}
+
+.profile .column_2 {
+	width: 540px;
+}
+
+
+

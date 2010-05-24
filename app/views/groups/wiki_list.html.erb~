@@ -1,0 +1,32 @@
+
+<%= stylesheet_link_tag 'common' %>
+<%= stylesheet_link_tag 'groups' %>
+
+
+<h1>List Of Wiki Pages in <%=@group.name%></h1>
+<div id="add_group">
+  <%if @wiki.length != 0  %>
+	<%for wiki in @wiki%>
+          <%= link_to "#{wiki.title}", :controller => "wiki/#{@group.id}/#{wiki.path}"   %><br>
+         <%end%>
+	<div style="clear:both;"></div>
+        <%else%>
+          No Pages on this group
+        <%end%>
+</div>
+
+<% if logged_in? && current_user.is_group_admin(@group) %>
+<%=link_to "Create new wiki ", {:controller => "wiki/#{@group.id}", :action => 'edit' }, :onclick => "TotalCheckedValues()" %>
+<%end%>
+
+
+ <% form_tag({ :controller => "wiki", :action => "edit"}, {:id=>"search_form"}) do %>
+    <%= hidden_field_tag :group_id, @group.id%>
+  <% end %>
+
+  <script type="text/javascript" language="JavaScript">
+
+    function TotalCheckedValues() {
+      var name = document.getElementById('search_form').submit();
+    }
+  </script>

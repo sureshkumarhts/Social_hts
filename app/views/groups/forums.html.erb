@@ -1,0 +1,129 @@
+
+<%= stylesheet_link_tag 'forum' %>
+<table width="700px" >
+  <tr>
+    <td>
+      <%if !params[:forum_topic_id] and !params[:forum_post_id]%>
+        <h2>Forums</h2>
+        <div id="topic_header">
+          <div class="topic_title">Forum</div>
+          <div class="topic_threads">Threads</div>
+          <div class="topic_posts">Posts</div>
+          <div class="topic_last_post">Last Post</div>
+        </div>
+        <% @group.forum_topics.each do |topic| %>
+          <div class="a_topic_group">
+            <div class="topic_title"><%= link_to topic.title, :controller => 'groups', :action => 'forums', :forum_topic_id => topic   %></div><br/>
+            <div class="topic_desc"><%= topic.description %></div>
+            <div class="topic_threads"><%= topic.forum_threads.length %></div>
+            <div class="topic_posts"><%= topic.forum_posts.length %></div>
+            <% if topic.forum_posts.length != 0 %>
+              <% last_post = topic.forum_posts[0] %>
+              <div class="topic_last_post">
+                <%= link_to last_post.title, forum_post_path(last_post) %><br/>
+                posted by <%= last_post.user.name %><br/>
+                <%= last_post.created_at %>
+              </div>
+            <% else %>
+              <div class="topic_last_post">No Posts</div>
+            <% end %>
+          </div>
+        <%end%> <br/>
+        <div>  <% if logged_in? %>
+            <% if @group.users.include?(current_user) %><%= link_to 'Create New Topic', :controller => 'groups', :action => 'new_forum_topic', :id => @group.id%>
+            <%end%><%end%></div>
+
+      <%elsif params[:forum_topic_id] and !params[:forum_post_id]%>
+
+
+        
+        <div id="forum_links">
+          <% if logged_in? %>
+            <div id="forum_all"><%= link_to 'Show Topics', forum_topics_path %></div>
+            <% if @forum_topic %>
+              <div id="forum_my"><%= link_to 'My Posts', user_forum_posts_path(current_user) %></div>
+              <div id="forum_add"><%= link_to 'Add a Post', new_forum_post_path(:forum_topic_id=>@forum_topic.id) %></div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <% if @forum_topic %>
+          <h1><%= @forum_topic.title %></h1>
+        <% else %>
+          <h1>Posts for <%= current_user.name %></h1>
+        <% end %>
+        <div id="forum_table">
+          <table id="post_table" border="1" cellpadding="2" cellspacing="0">
+            <thead>
+            <th>Posts</th>
+            <th>Views</th>
+            <th>Replies</th>
+            <th>Latest Activity</th>
+            </thead>
+            <% for forum_post in @forum_posts %>
+              <tr>
+                <td>
+                  <div class="discussions_col"><%= link_to forum_post.title, :controller => 'groups', :action => 'forums', :forum_post_id => forum_post  %></div>
+                </td>
+                <td>
+                  <div class="views_col views_count"><%= forum_post.views %></div>
+                </td>
+                <td>
+                  <div class="replies_col replies_count"><%= forum_post.replies.length %></div>
+                </td>
+                <td>
+                  <% if forum_post.replies && forum_post.replies.length > 0 %>
+                    <div class="activity_col latest_activity"><%= forum_post.replies[forum_post.replies.length-1].created_at %></div>
+                  <% else %>
+                    <div class="activity_col latest_activity"><%= forum_post.created_at %></div>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+          <% if @forum_posts.length == 0 %>
+            No posts exist.
+          <% end %>
+        </div>
+            <%else%>
+
+
+
+<div id="post_topic">
+	Topic: <%= link_to @forum_post.forum_topic.title, forum_topic_forum_posts_path(@forum_post.forum_topic) %>
+</div>
+<div class="forum_post">
+	<div class="forum_post_photo">
+		<% if @forum_post.user.profile_photo %>
+			<%= link_to image_tag(@forum_post.user.profile_photo.public_filename(:medium)), user_url(@forum_post.user) %>
+		<% else %>
+			<%= link_to @forum_post.user.name, user_url(@forum_post.user) %>
+		<% end %>
+	</div>
+	<div class="forum_post_text">
+		<div class="forum_post_title"><%= link_to @forum_post.title, forum_post_path(@forum_post) %></div>
+		<div class="forum_post_detail">Posted by <%= @forum_post.user.name %><br/>
+		<%= @forum_post.created_at.to_s(:event_brief) %></div>
+	</div>
+	<div class="forum_post_body">
+		<%= @forum_post.body %>
+	</div>
+	<div style="clear:both;"></div>
+</div>
+<div id="existing_replies">
+	<%= render :partial => 'forum_posts/forum_post_replies' %>
+</div>
+<%= render :partial => 'forum_posts/forum_post_reply_form' %>
+
+
+
+      <%end%>
+
+    
+    </td>
+  </tr>
+</table>
+
+
+
+

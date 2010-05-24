@@ -1,0 +1,32 @@
+<% unless @lay_card = System.layout_card(@card, params[:layout]) %>
+  <% @lay_content = capture do %>
+<!DOCTYPE HTML>
+<html>
+  <head>
+    {{*head}}
+  </head>
+  
+  <body id="wagn">
+    <div id="menu">
+      [[/ | Home]]   [[/recent | Recent]]   {{*navbox}} {{*account links}}
+    </div>
+    
+    <div id="primary">
+      {{_main}}
+    </div>
+    
+    <div id="secondary">
+      <div id="logo">[[/ | {{*logo}}]]</div>
+      {{*sidebar}}
+      <div id="credit">Wheeled by [[http://www.wagn.org|Wagn]] v. {{*version}}</div>
+      {{*alerts}}
+    </div>
+    
+    {{*foot}}
+  </body>
+</html>
+  <% end %>
+  <% @lay_card = layout_card(@lay_content) %>
+<% end %>
+
+<%= render_layout_card(@lay_card) %>

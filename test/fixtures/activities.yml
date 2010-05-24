@@ -1,0 +1,196 @@
+# == Schema Information
+# Schema version: 20090206190209
+#
+# Table name: activities
+#
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)
+#  public     :boolean(1)
+#  item_id    :integer(4)
+#  item_type  :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  user_id: 1
+  item_id: 1
+  item_type: BlogPost
+  action: 
+
+two:
+  id: 2
+  user_id: 1
+  item_id: 2
+  item_type: BlogPost
+  action: 
+  
+three:
+  id: 3
+  user_id: 1
+  item_id: 1
+  item_type: StatusPost
+  action: 
+
+four:
+  id: 4
+  user_id: 1
+  item_id: 2
+  item_type: StatusPost
+  action: 
+  
+five:
+  id: 5
+  user_id: 3
+  item_id: 2
+  item_type: BlogPost
+  action: 
+
+six:
+  id: 6
+  user_id: 3
+  item_id: 1
+  item_type: ForumPost
+  action: 
+
+seven:
+  id: 7
+  user_id: 4
+  item_id: 1
+  item_type: Photo
+  action: create
+
+eight:
+  id: 8
+  user_id: 5
+  item_id: 2
+  item_type: Photo
+  action: create
+
+nine:
+  id: 9
+  user_id: 5
+  item_id: 2
+  item_type: StatusPost
+  action:
+  
+friendship_act:
+  id: 10
+  user_id: 1
+  item_id: 5
+  item_type: Friendship
+  action: 
+  
+event_act:
+  id: 11
+  user_id: 1
+  item_id: 1
+  item_type: Event
+  action:
+  
+user_act:
+  id: 12
+  user_id: 1
+  item_id: 1
+  item_type: User
+  action:
+
+photo_act:
+  id: 13
+  user_id: 1
+  item_id: 1
+  item_type: Photo
+  action:
+
+group_act:
+  id: 14
+  user_id: 1
+  item_id: 1
+  item_type: Group
+  action:
+  
+blog_post_act:
+  id: 15
+  user_id: 1
+  item_id: 1
+  item_type: BlogPost
+  action:
+  
+attendance_act:
+  id: 16
+  user_id: 1
+  item_id: 1
+  item_type: Attendance
+  action:
+
+membership_act:
+  id: 17
+  user_id: 1
+  item_id: 1
+  item_type: Membership
+  action:
+
+forum_post_act:
+  id: 18
+  user_id: 1
+  item_id: 1
+  item_type: ForumPost
+  action:
+
+job_post_act:
+  id: 19
+  user_id: 1
+  item_id: 1
+  item_type: JobPost
+  action:
+
+book_review_act:
+  id: 20
+  user_id: 1
+  item_id: 1
+  item_type: BookReview
+  action:
+
+status_post_act:
+  id: 21
+  user_id: 1
+  item_id: 1
+  item_type: StatusPost
+  action:
+
+link_act:
+  id: 22
+  user_id: 1
+  item_id: 1
+  item_type: Link
+  action:
+
+project_act:
+  id: 23
+  user_id: 1
+  item_id: 1
+  item_type: Project
+  action:
+
+announcement_act:
+  id: 24
+  user_id: 1
+  item_id: 1
+  item_type: Announcement
+  action:
+
+classified_act:
+  id: 25
+  user_id: 1
+  item_id: 1
+  item_type: Classified
+  action:
+
+
+
+
+
+

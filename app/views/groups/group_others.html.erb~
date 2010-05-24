@@ -1,0 +1,12 @@
+
+<%= stylesheet_link_tag 'groups' %>
+
+ <h2>Others</h2>
+    <p> <div class="module_body">
+      <div class="module_foot"><%=link_to "Wiki", :controller => "groups", :action => 'wiki_list', :id =>@group.id %></div>
+      <!-- <div class="module_foot"><%#=link_to "Wiki", {:controller => "wiki/#{@group.id}", :action => 'edit' }, :onclick => "TotalCheckedValues()" %></div> -->
+      <div class="module_foot"><%= link_to "Calendar", :controller => 'calendar', :action => 'index', :id =>@group.id %></div>
+      <% if logged_in? && current_user.is_group_admin(@group) %>
+        <div class="module_foot"><%= link_to "File Upload", :controller => 'groups', :action => 'upload', :id =>@group.id %></div>
+      <%end%>
+    </div></p>

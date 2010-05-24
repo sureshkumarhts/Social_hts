@@ -1,0 +1,20 @@
+<%= wiki_page_style %>
+
+<% if params[:path].blank?%>
+<h1><%=wt 'Create wiki page' %></h1>
+<%else%>
+<h1><%=wt 'Editing wiki page' %></h1>
+<%end%>
+
+
+
+<% wiki_page_form do |f| %>
+  <%= f.hidden_field :previous_version_number, :value => f.object.last_version_number %>
+  
+  <p><%=wt 'Path:' %><br/><%= f.text_field :path %></p>
+  <p><%=wt 'Title:' %><br /><%= f.text_field :title %></p>
+  <p><%=wt 'Content:' %><br /><%= f.text_area :content,  :class=>"mceEditor" %></p>
+  <p><%#=wt 'Comment:' %><br /><%= f.text_field :comment %></p>
+  
+  <input type="submit" value="<%=wt 'Save page' %>" class="submit" />
+<% end %>

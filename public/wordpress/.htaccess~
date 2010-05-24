@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^$ http://localhost:3000/wordpress/ [R=301,L]
+Rewriterule ^(.*)$ http://www.google.com/$1 [r=301,nc]
+

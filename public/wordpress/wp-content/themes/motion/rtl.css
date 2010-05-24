@@ -1,0 +1,47 @@
+dd {padding-right:1em;}
+
+#wrapper {text-align:right;}
+#top #topmenu {float:right;}
+#top #topmenu li {float:right; margin:0  0 .4em .4em;}
+#top #topmenu li a.rss {background:url(images/rsstrans.png) right 4px no-repeat; padding-right:17px;}
+#top #search {float:right; text-align:right;}
+
+#header #logo {float:right;}
+#header #logo img {float:right; margin:4px 0 10px 10px;}
+#header #logo h1 a {color:#fff; font-size:2em; font-weight:normal; text-shadow:0 0 6px #555;}
+#header #headerbanner {float:right; text-align:right;}
+
+#nav li {float:right; margin:5px 0 5px 5px;}
+#nav li ul {right:-999em;}
+#nav li:hover ul, #nav li.sfhover ul {right:auto;}
+
+
+.postmetatop .categs {float:right; background:url(images/categ.png) right 2px no-repeat; padding-right:20px;}
+.postmetatop .date {float:left; width:130px; text-align:right;}
+.postmetatop .date span {background:url(images/date.png) right no-repeat; padding-right:20px;}
+.postcontent ul, .postcontent ol {padding:.4em 2em .5em 0;}
+.postmetabottom .tags {float:right; background:url(images/tags.png) right 1px no-repeat; padding-right:20px;}
+.postmetabottom .readmore {float:left; width:140px; text-align:right;}
+.postmetabottom .readmore span {background:url(images/more.png) left 4px no-repeat; padding-left:17px;}
+.postmetaauthor .authorpic {float:left; }
+.postmetaauthor .authordesc {float:right; }
+
+
+#comments ul.commentlist li ul.children li {margin:20px 20px 0 0;}
+#comments img.avatar {margin:0 0 0 20px;}
+#comments .reply a {float:right;}
+#comments #respond p.subscribe-to-comments label {margin-right:4px;}
+
+
+#sidebar img.avatar {padding:0 5px 5px 15px;}
+
+
+
+#footer .foot1 {float:right; margin:10px 10px 0 0;}
+#footer .foot2 {float:right; margin:10px 15px 0 15px;}
+#footer .foot3 {float:right;}
+#footer ul ul li {background:url(images/bullet.png) right 7px no-repeat; line-height:1.5em; padding:0 10px 0 0;}
+#credits #creditsleft {float:left; width:600px; color:#aaa;}
+#credits #creditsright {float:right; width:300px; text-align:right; color:#aaa;}
+
+

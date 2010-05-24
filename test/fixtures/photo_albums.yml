@@ -1,0 +1,26 @@
+# == Schema Information
+# Schema version: 20090206190209
+#
+# Table name: photo_albums
+#
+#  id         :integer(4)      not null, primary key
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+   id: 1
+   view_count: 1
+   title: Test Album 1
+   description: Test Album 1 Desc
+   user_id: 1
+
+two:
+   id: 2
+   view_count: 1
+   title: Test Album 2
+   description: Test Album 2 Desc
+   user_id: 1
+

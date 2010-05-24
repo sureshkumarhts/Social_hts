@@ -1,0 +1,55 @@
+
+one:
+  id: 1
+  user_id: 1
+  body: Topic 1 Post 1 Body
+  title: Topic 1 Post 1
+  forum_topic_id: 1
+  featured: false
+   
+<% (2..5).each do |num| %>
+one<%= num %>:
+  id: <%= num %>
+  user_id: 1
+  body: Topic 1 Post <%= num %> Body
+  title: Topic 1 Post <%= num %>
+  forum_topic_id: 1
+  featured: false
+<% end %>
+
+two:
+  id: 6
+  user_id: 1
+  body: Topic 2 Post 1 Body
+  title: Topic 2 Post 1
+  forum_topic_id: 2
+  featured: false
+   
+<% (2..5).each do |num| %>
+two<%= num %>:
+  id: <%= (5 + num).to_s %>
+  user_id: 1
+  body: Topic 2 Post <%= num %> Body
+  title: Topic 2 Post <%= num %>
+  forum_topic_id: 2
+  featured: false
+<% end %>
+
+three:
+  id: 11
+  user_id: 2
+  body: Topic 3 Post 1 Body
+  title: Topic 3 Post 1
+  forum_topic_id: 3
+  featured: true
+   
+<% (2..5).each do |num| %>
+three<%= num %>:
+  id: <%= (10 + num).to_s %>
+  user_id: 2
+  body: Topic 3 Post <%= num %> Body
+  title: Topic 3 Post <%= num %>
+  forum_topic_id: 3
+  featured: false
+<% end %>
+   

@@ -1,0 +1,41 @@
+<%#
+Copyright 2009 Timothy Fisher
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+%>
+
+
+
+<%= error_messages_for :asset %>
+<% form_for(:asset, :url => {:action => 'do_the_upload'} ,:html => { :multipart => true }) do |form| %>
+  <p>
+    <label for="uploaded_data">Upload a file:</label>
+    <input type="hidden" name="asset[group_id]" value= <%=@group.id%> />
+    <%= form.file_field :asset %>
+  </p>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+ <% unless @group.assets.empty?  %>
+
+	<% for event in @group.assets %>
+
+		<%= image_tag('p_icon.gif') %> <%= link_to event.asset_file_name, event.asset.url %> <br>
+
+	<% end %>
+                <%else%>
+                No Documents Added yet
+                <%end%>
+

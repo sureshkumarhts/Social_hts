@@ -1,0 +1,48 @@
+
+<%= stylesheet_link_tag 'forum' %>
+
+
+
+<table width="700px" >
+<tr>
+<td>
+
+ <h2>Forums</h2>
+   
+    <div id="topic_header">
+      <div class="topic_title">Forum</div>
+      <div class="topic_threads">Threads</div>
+      <div class="topic_posts">Posts</div>
+      <div class="topic_last_post">Last Post</div>
+    </div>
+    <% @group.forum_topics.each do |topic| %>
+      <div class="a_topic_group">
+        <div class="topic_title"><%= link_to topic.title, forum_topic_groups_path(topic) %></div><br/>
+        <div class="topic_desc"><%= topic.description %></div>
+        <div class="topic_threads"><%= topic.forum_threads.length %></div>
+        <div class="topic_posts"><%= topic.forum_posts.length %></div>
+        <% if topic.forum_posts.length != 0 %>
+          <% last_post = topic.forum_posts[0] %>
+          <div class="topic_last_post">
+            <%= link_to last_post.title, forum_post_path(last_post) %><br/>
+            posted by <%= last_post.user.name %><br/>
+            <%= last_post.created_at %>
+          </div>
+        <% else %>
+          <div class="topic_last_post">No Posts</div>
+        <% end %>
+      </div>
+    <%end%> <br/>
+     <div>  <% if logged_in? %>
+      <% if @group.users.include?(current_user) %><%= link_to 'Create New Topic', :controller => 'groups', :action => 'new_forum_topic', :id => @group.id%>
+    <%end%><%end%></div>
+
+
+
+</td>
+</tr>
+</table>
+
+
+
+

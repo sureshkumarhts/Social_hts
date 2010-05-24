@@ -1,0 +1,9 @@
+
+<b>Owner request why you like to join?</b>
+<div class="head_links">
+  <% form_for(:membership, :url => memberships_path(:user_id => current_user.id, :group_id => @group.id)) do |f| %>
+    <%=text_area_tag :description, nil, :size => "55x10"%>
+    <%= hidden_field_tag(:approved, 0)%> <br>
+    <%= submit_tag "Submit" %>
+  <% end %>
+</div>

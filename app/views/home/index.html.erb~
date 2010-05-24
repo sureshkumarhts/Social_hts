@@ -1,0 +1,209 @@
+<%#
+Copyright 2009 Timothy Fisher
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+%>
+
+<link href="/stylesheets/text.css" rel="stylesheet" type="text/css">
+
+<% content_for :script_content do %>
+	<script>
+		function page_init() {
+			// delay slideshow start to allow photos widget to load via ajax
+			setTimeout(start_slideshow, 10000);
+		}
+		
+		function start_slideshow() {
+			<% photo = @photos[0] %>
+			var slide_show = new SlideShow("widget_photo", 3000);
+			<% @photos.each do |photo| %>
+			{
+				var img<%= photo.id %> = new Image();
+				img<%= photo.id %>.onload = function(){slide_show.add_slide(img<%= photo.id %>);};
+				img<%= photo.id %>.src = "<%= photo.public_filename(:display) %>";
+			}
+			<% end %>
+		}
+	</script>
+<% end %>
+
+
+<div class="column_1">
+
+	<%#= render :partial => 'shared/network_info_widget' %>
+
+<table width="947" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="947" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="621"><img src="/images/banner.jpg" width="621" height="326"></td>
+              <td width="36%" background="/images/signin_bg.jpg"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="4%" height="34">&nbsp;</td>
+                    <td width="92%" class="red_text2"><img src="images/signin_text.jpg" width="293" height="52"></td>
+                    <td width="4%">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>
+
+      <table width="100%"  border="0" cellspacing="2" cellpadding="0">
+<% form_tag session_path do -%>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+
+                          
+                          <td width="35%" align="right" class="bold1">Email:</td>
+                          <td width="65%">
+                           <%= text_field_tag 'login' %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="right" class="headertext">&nbsp;</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="right" class="bold1">Password:</td>
+                          <td>
+                            <%= password_field_tag 'password' %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td>
+                            <input type="checkbox" name="checkbox" value="checkbox">
+                            <span class="innertext">Remember me</span> </td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td><a href="#" class="content_orange_text">Forgot your password?</a></td>
+                        </tr>
+                        <tr >
+                          <td height="10" colspan="2"></td>
+                        </tr>
+                        <tr align="center">
+                          <td height="37" >&nbsp; </td>
+                          <td align="left"><%= submit_tag 'Log in', :class=>'login_button' %></td>
+                        </tr>
+	<% end -%>
+                    </table>
+
+
+                    </td>
+                    <td>&nbsp;</td>
+                  </tr>
+              </table></td>
+            </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="33%"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="4%" align="left"><img src="images/arrow_icon.jpg" width="23" height="28"></td>
+                    <td width="96%" class="headertext">Friendship</td>
+                  </tr>
+              </table></td>
+              <td width="1%" rowspan="3"><img src="images/line2.jpg" width="4" height="126"></td>
+              <td width="41%"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="4%" align="left"><img src="images/arrow_icon.jpg" width="23" height="28"></td>
+                    <td width="96%" class="headertext">Share</td>
+                  </tr>
+              </table></td>
+              <td width="1%" rowspan="3"><img src="images/line2.jpg" width="4" height="126"></td>
+              <td width="33%"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="4%" align="left"><img src="images/arrow_icon.jpg" width="23" height="28"></td>
+                    <td width="96%" class="headertext">New to ping.com </td>
+                  </tr>
+              </table></td>
+            </tr>
+            <tr>
+              <td width="33%" height="5"><img src="images/line1.jpg" width="312" height="5"></td>
+              <td width="41%"><img src="images/line1.jpg" width="312" height="5"></td>
+              <td width="33%"><img src="images/line1.jpg" width="312" height="5"></td>
+            </tr>
+            <tr>
+              <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="24%"><img src="images/friendship_img.jpg" width="97" height="90"></td>
+                    <td width="73%" valign="top" class="content_text"><br>
+                  Find and chat with people who share your hobbies and interests. Meet new people, share advice and discover something new.</td>
+                    <td width="3%">&nbsp;</td>
+                  </tr>
+              </table></td>
+              <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="37%"><img src="/images/share_img.jpg" width="116" height="90"></td>
+                    <td width="60%" valign="top" class="content_text"><br>
+                  Keep friends and family up-to-date with your profile, share photos, share videos and celebrate big events with your timeline.</td>
+                    <td width="3%">&nbsp;</td>
+                  </tr>
+              </table></td>
+              <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="37%"><img src="/images/newuser_img.jpg" width="111" height="90"></td>
+                    <td width="60%" valign="top" class="content_text"><br>
+                  Join in now, it&rsquo;s free, easy and you&rsquo;ll be back in touch in no time! <br>
+                  <br>
+                   <%= link_to 'REGISTER', signup_url, :class=>"register_button" %>
+                   
+                   <input name="Submit" type="submit" class="register_button" value="REGISTER">
+                    </td>
+                    <td width="3%">&nbsp;</td>
+                  </tr>
+              </table></td>
+            </tr>
+            <tr>
+              <td colspan="5" height="10"></td>
+            </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><img src="images/ad1.jpg" width="947" height="97"></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>       
+
+
+	<div id="left_side_widgets"></div>
+</div>
+
+
+
+<div class="column_2">
+	<div id="widgets"></div>
+	<!-- display HTML widgets
+	<% if @html_contents %>
+		<% @html_contents.each do |html_content| %>
+			<%= render :partial => 'html_contents/html_content_widget', :locals=>{:content=>html_content} %>
+		<% end %>
+	<% end %>
+	-->
+</div>
+

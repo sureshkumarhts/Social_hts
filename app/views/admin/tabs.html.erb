@@ -1,0 +1,36 @@
+<style>
+	table#pages th, table#pages td {
+		text-align: left;
+	}
+	
+	#content {
+		width: 900px;
+	}	
+</style>
+
+          <%= form_tag({ :action => 'tab_update' },:multipart => true ) %>
+
+            
+<h2 class="ic-db">Tabs</h2>
+<table id="pages">
+	<thead>
+		<th width="170px">Name</th>
+		<th width="300px">Enable</th>
+        </thead>
+	<tbody>
+		<% @tabs.each do |tab| %>
+			<tr>
+				<td><%= tab.name %></td>
+                                 
+
+				<td><%checkeds = tab.enable ?  'checked':'nope'%>
+<%=check_box :tab, "#{tab.id}", {:checked => "#{checkeds}" }, "1"  -%></td>
+			</tr>
+		<% end %>
+
+	</tbody>
+</table>
+<%= submit_tag "submit " %>
+
+
+

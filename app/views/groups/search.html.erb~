@@ -1,0 +1,15 @@
+<%= stylesheet_link_tag 'common' %>
+<%= stylesheet_link_tag 'groups' %>
+<div id="content_table">
+<span class="group_title">Groups</span>
+	<% for group in @groups %>
+		<%= render :partial => 'group_brief', :locals=>{:group=>group} %>
+	<% end %>
+<div id="content_table">
+<span class="group_title">Froums</span>
+<div id="content_table">
+<span class="group_title">Events</span>
+	<% for event in @events %>
+		<%= render :partial => '/events/event_brief', :locals=>{:event=>event} %>
+	<% end %>
+</div>

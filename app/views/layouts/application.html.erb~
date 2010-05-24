@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title><%= @network.name %></title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <%= stylesheet_link_tag 'style' %>
+    <%= stylesheet_link_tag "themes/mycompany/mycompany.css" %>
+
+    <%= stylesheet_link_tag '../javascripts/dojo/dijit/themes/tundra/tundra.css' %>
+    <%= stylesheet_link_tag '../javascripts/dojo/dojox/grid/resources/Grid.css' %>
+    <%= stylesheet_link_tag '../javascripts/dojo/dojox/grid/resources/tundraGrid.css' %>
+
+    <%= stylesheet_link_tag 'menu' %>
+
+    <%= javascript_include_tag "dropdown_Script.js" %>
+    <%= javascript_include_tag 'prototype'%>
+
+    <script type="text/javascript" src="/javascripts/dojo/release/dojo/dojo/dojo.js" djConfig="isDebug:false, parseOnLoad: true"></script>
+    <script type="text/javascript" src="/javascripts/dojo/release/dojo/dojo/mydojo.js"></script>
+
+    <%= javascript_include_tag "widget" %>
+
+    <%= render 'layouts/widgets' %>
+
+    <%= javascript_include_tag "slide_show" %>
+
+    <%= yield :script_content %>
+
+    <%= javascript_include_tag "application" %>
+
+    <script type="text/javascript">  	
+      var authenticity_token = "<%= form_authenticity_token %>";
+    </script>
+
+
+    <%= include_tiny_mce_if_needed %>
+
+    <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+
+
+  </head>
+
+  <body id="wagn">
+
+  <style type="text/css">
+#nav-utility{margin:5px 8px;text-align:right;position:relative;zoom:1;}
+#nav-utility ul,#nav-utility li,#nav-utility p{display:inline;}
+#nav-utility p{font-size:110%;color:#666;padding-right:2px;*padding-right:6px;-webkit-text-size-adjust:165%;}
+p#nav-utility-account-type{position:absolute;top:0;left:0;}
+#nav-utility li{font-size:110%;color:#666;*background:url(/img/bg/bg_grey_dotted_h-line_3x1.png) no-repeat 0 7px;padding-right:2px;*padding-right:6px;}
+#nav-utility li:last-child{padding-right:0;}
+#nav-utility li:before{content:'\00B7';padding-right:5px;}
+#nav-utility a{color:#666;}
+#nav-utility a hover{color:#000;}
+#nav-utility .jump-link{position:absolute;left:-9999px;}
+    <!--
+    body {
+      margin-left: 0px;
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      
+    }
+    -->
+
+  </style>
+  <%
+  # These are the items displayed in the top navigation bar
+  def nav_menu_items
+
+    [
+
+      {'name'=>'members','title'=>'Members', 'index_url'=>'users'},
+
+      {'name'=>'blogs','title'=>'Blogs', 'index_url'=>'blog_posts'},
+      {'name'=>'groups','title'=>'Groups', 'index_url'=>'groups'},
+      {'name'=>'events','title'=>'Events', 'index_url'=>'events'},
+      {'name'=>'photos','title'=>'Photos', 'index_url'=>'photo_manager'},
+      #{'name'=>'classifieds','title'=>'Classifieds', 'index_url'=>'classifieds'},
+      {'name'=>'forum','title'=>'Forum', 'index_url'=>'forum_topics'}
+    ]
+
+
+  end
+%>
+
+  <link href="/stylesheets/text.css" rel="stylesheet" type="text/css">
+
+  <table width="947" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="24%" align="left"><img src="/images/logo.jpg" width="223" height="65"></td>
+            <td width="76%"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+		<tr>		
+		<td style="font-size:10px; color:#000000; font-face:arial;" align="right"><%= render :partial => 'users/user_control' %>
+</td>                
+		</tr>
+		<tr  align="right" >
+                  <td align="right">
+                    <ul class="menu" id="menu">
+                      <% if @section == 'MAIN' %>
+                        <li>  <%= link_to 'Main', root_url, :class=>'menulink' %>  </li>
+                      <% else %>
+                        <li>  <%= link_to 'Main', root_url, :class=>'menulink' %> </li>
+                      <% end %>
+                      <% if logged_in? %>
+                        <% if @section == 'MY PAGE' %>
+                          <li>   <%= link_to 'My Page', user_path(current_user), :class=>'menulink' %> </li>
+                        <% else %>
+                          <% if (current_user) %>
+                            <li>   <%= link_to 'My Page', user_path(current_user), :class=>'menulink' %></li>
+                          <% else %>
+                            <li>      <%= link_to 'My Page', root_url, :class=>'menulink' %></li>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+
+                      <%   @tabs = Tab.find(:all,:conditions=>['enable=?',1]).each do |item| %>
+                        <%if item.name == 'members'%>
+                          <li>
+                              <%= link_to item.name.to_s.capitalize, users_path, :class=>'menulink' %>
+                             <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                              <% if logged_in? %>
+                             
+                                <li><%= link_to "All Members", users_path %> </li>
+                                <li><%= link_to 'My Friends', user_friends_path(current_user) %>
+                                  <ul style="overflow: hidden; display: block; height: 0px; z-index: 118; opacity: 0.00833333;">
+                                    <li><%= link_to 'My Requested Friends', '/friends/requested_friends?user_id='+current_user.id.to_s %></li>
+                                    <li><%= link_to 'My Pending Friends', '/friends/pending_friends?user_id='+current_user.id.to_s %></li>
+                                </ul></li>
+                            <% end %>
+                        </ul></li>
+                      <%elsif item.name == 'blogs'%>
+                    <li> <%= link_to item.name.to_s.capitalize, blog_posts_path, :class=>'menulink' %>
+                       <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                      		<li><%= link_to 'All Blog Posts' %></li>
+		<li><%= link_to 'My Blog', user_blog_posts_path(current_user) %></li>
+		<li><%= link_to 'Add a Blog Post', new_blog_post_path %></li>
+                 <% end %>
+                    </ul></li>
+
+                  <%elsif item.name == 'groups'%>
+                    <li> <%= link_to item.name.to_s.capitalize, groups_path, :class=>'menulink' %></li>
+                  <%elsif item.name == 'events'%>
+                    <li> <%= link_to item.name.to_s.capitalize, events_path, :class=>'menulink' %></li>
+                  <%elsif item.name == 'photos'%>
+                    <li> <%= link_to item.name.to_s.capitalize,{ :controller=>'photo_manager'}, :class=>'menulink' %>
+ <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                       <li>  <%= link_to 'Add Photo', new_photo_path %></li>
+                       <li>  <%= link_to 'New Album', new_photo_album_path %></li>
+                             <% end %>
+                    </ul></li>
+                  <%elsif item.name == 'classifieds'%>
+                    <li> <%= link_to item.name.to_s.capitalize, classifieds_path, :class=>'menulink' %></li>
+                  <%elsif item.name == 'forum'%>
+                    <li> <%= link_to item.name.to_s.capitalize, forum_topics_path, :class=>'menulink' %></li>
+                  <%end%>
+                <% end %>
+                <% if logged_in? && current_user.roles.include?(Role.creator) %>
+                  <% if @section == 'MANAGE' %>
+                    <li>  <%= link_to 'Manage', { :controller=>'admin'},:class=>'menulink' %></li>
+                  <% else %>
+                    <li> <%= link_to 'Manage', { :controller=>'admin'},:class=>'menulink' %></li>
+                  <% end %>
+                <% end %>
+
+                </ul>
+
+
+            </td>
+          </tr>
+        </table></td>
+    </tr>
+  </table></td>
+</tr>
+<tr>
+  <td><img src="/images/red_bar.jpg" width="947" height="30">
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %></td>
+
+</tr>
+<tr>
+  <td>
+
+    <%=yield%>
+    <div class="col2">
+      <!-- TODO: Needs to be refactored to move this content into page templates -->
+      <% if @section == 'MAIN' %>
+  <%#= render :partial => 'users/user_control_widget' %>
+        <!-- place holder for AJAX widgets -->
+        <div id="right_side_widgets"></div>
+      <% elsif @section == 'MY PAGE' || (@section == 'MEMBERS' && @user != nil)%>
+        <!-- On a user page -->
+        <%= render :partial => 'users/add_friend_widget' %>
+        <%= render :partial => 'users/user_control_widget' %>
+        <%= render :partial => 'events/events_profile' %>
+        <%= render :partial => 'forum_posts/forum_posts_profile' %>
+        <% if current_user == @user %>
+          <%= render :partial => 'messages/unread_messages_widget' %>
+        <% end %>
+        <div id="right_side_widgets"></div>
+
+      <% end %>
+    </div>
+
+  </td>
+</tr>
+<tr>
+  <td><img src="/images/bottom_red_bar.jpg" width="947" height="22"></td>
+</tr>
+<tr>
+  <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="2%">&nbsp;</td>
+        <td width="64%" align="left"><a href="#" class="footer_link">Main</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Members</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Blogs</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Groups</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Events</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Photos</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Classifieds</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Forum</a></td>
+        <td width="32%" align="right" class="copyright_text">Copyright &copy; 2009, Ping.com. </td>
+        <td width="2%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="10" colspan="4"></td>
+      </tr>
+    </table></td>
+</tr>
+</table>
+<script type="text/javascript">
+  var menu=new menu.dd("menu");
+  menu.init("menu","menuhover");
+</script>
+  <script src="http://sharebar.addthiscdn.com/v1/sharebar.js" type="text/javascript"></script>
+
+
+<div class="addthis_sharebar_config" style="display:none;">
+ * username: sharebar
+ * bar background color: #424242
+ * bar background opacity: 0.7
+</div>
+</body>
+</html>
+
+
+
