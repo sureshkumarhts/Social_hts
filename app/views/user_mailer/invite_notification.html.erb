@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.:3000/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@ limitations under the License.
 
   	
 <%= @invite.user.name %> has invited you to join the Michigan Ruby Community 
-at <a href="http://www.rubymi.org">RubyMI.org</a>.
+at <a href="http://localhost:3000">Localhost</a>.
 <br/><br/>
 To accept this invitation, click this link:<br/>
-<%= link_to "http://www.rubymi.org/signup?invite_code=#{@invite.invite_code}", "http://www.rubymi.org/signup?invite_code=#{@invite.invite_code}" %>
+<%= link_to "http://localhost:3000/signup?invite_code=#{@invite.invite_code}", "http://localhost:3000/signup?invite_code=#{@invite.invite_code}" %>

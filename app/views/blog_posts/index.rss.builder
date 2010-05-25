@@ -4,7 +4,7 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
 		xml.title "Activity Feed"
     xml.link  activities_url
     xml.pubDate CGI.rfc1123_date @activities.first.created_at if @activities.any?
-    xml.description "RubyMI Activity Feed"
+    xml.description "Activity Feed"
     
     @activities.each do |activity|
       xml.item do
