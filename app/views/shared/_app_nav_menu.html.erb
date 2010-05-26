@@ -1,0 +1,94 @@
+		<tr  align="right" >
+                  <td align="right">
+                    <ul class="menu" id="menu">
+                      <% if @section == 'MAIN' %>
+                        <li>  <%= link_to 'Main', root_url, :class=>'menulink' %>  </li>
+                      <% else %>
+                        <li>  <%= link_to 'Main', root_url, :class=>'menulink' %> </li>
+                      <% end %>
+                      <% if logged_in? %>
+                        <% if @section == 'MY PAGE' %>
+                          <li>   <%= link_to 'My Page', user_path(current_user), :class=>'menulink' %> </li>
+                        <% else %>
+                          <% if (current_user) %>
+                            <li>   <%= link_to 'My Page', user_path(current_user), :class=>'menulink' %></li>
+                          <% else %>
+                            <li>      <%= link_to 'My Page', root_url, :class=>'menulink' %></li>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+
+                      <%   @tabs = Tab.find(:all,:conditions=>['enable=?',1]).each do |item| %>
+                        <%if item.name == 'members'%>
+                          <li>
+                              <%= link_to item.name.to_s.capitalize, users_path, :class=>'menulink' %>
+                             <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                              <% if logged_in? %>
+
+                                <li><%= link_to "All Members", users_path %> </li>
+                                <li><%= link_to 'My Friends', user_friends_path(current_user) %>
+                                  <ul style="overflow: hidden; display: block; height: 0px; z-index: 118; opacity: 0.00833333;">
+                                    <li><%= link_to 'My Requested Friends', '/friends/requested_friends?user_id='+current_user.id.to_s %></li>
+                                    <li><%= link_to 'My Pending Friends', '/friends/pending_friends?user_id='+current_user.id.to_s %></li>
+                                </ul></li>
+                            <% end %>
+                        </ul></li>
+                      <%elsif item.name == 'blogs'%>
+                    <li> <%= link_to item.name.to_s.capitalize, blog_posts_path, :class=>'menulink' %>
+                       <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                      		<li><%= link_to 'All Blog Posts', blog_posts_path %></li>
+		<li><%= link_to 'My Blog', user_blog_posts_path(current_user) %></li>
+		<li><%= link_to 'Add a Blog Post', new_blog_post_path %></li>
+                 <% end %>
+                    </ul></li>
+
+
+
+                  <%elsif item.name == 'groups'%>
+                    <li> <%= link_to item.name.to_s.capitalize, groups_path, :class=>'menulink' %>
+                     <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                      		<li><%= link_to 'All Groups', groups_path %></li>
+		<li><%= link_to 'My Groups', user_groups_path(current_user) %></li>
+		<li><%= link_to 'Add a Group', new_group_path %></li>
+                 <% end %>
+                    </ul></li>
+                  <%elsif item.name == 'events'%>
+                    <li> <%= link_to item.name.to_s.capitalize, events_path, :class=>'menulink' %>
+
+                     <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                      		<li>  <%= link_to 'Add an Event', new_event_path %></li>
+                 <% end %>
+                    </ul></li>
+                  <%elsif item.name == 'photos'%>
+                    <li> <%= link_to item.name.to_s.capitalize,{ :controller=>'photo_manager'}, :class=>'menulink' %>
+ <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                       <li>  <%= link_to 'Add Photo', new_photo_path %></li>
+                       <li>  <%= link_to 'New Album', new_photo_album_path %></li>
+                             <% end %>
+                    </ul></li>
+                  <%elsif item.name == 'classifieds'%>
+                    <li> <%= link_to item.name.to_s.capitalize, classifieds_path, :class=>'menulink' %></li>
+                  <%elsif item.name == 'forum'%>
+                    <li> <%= link_to item.name.to_s.capitalize, forum_topics_path, :class=>'menulink' %>
+                     <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
+                          <% if logged_in? %>
+                       <li> <%= link_to 'My Discussions', user_forum_posts_path(current_user) %></li> <% end %></ul></li>
+                  <%end%>
+                <% end %>
+                <% if logged_in? && current_user.roles.include?(Role.creator) %>
+                  <% if @section == 'MANAGE' %>
+                    <li>  <%= link_to 'Manage', { :controller=>'admin'},:class=>'menulink' %></li>
+                  <% else %>
+                    <li> <%= link_to 'Manage', { :controller=>'admin'},:class=>'menulink' %></li>
+                  <% end %>
+                <% end %>
+
+                </ul>
+
+
+            </td>
+          </tr>

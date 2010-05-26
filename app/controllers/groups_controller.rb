@@ -119,7 +119,7 @@ class GroupsController < ApplicationController
   end
 
   def events
-    if params[:group_id] and !params[:type] 
+    if params[:group_id] and !params[:type]
       @group = Group.find(params[:group_id])
     elsif   params[:event_id] and !params[:type]
       @event = Event.find(params[:event_id])
@@ -187,6 +187,7 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+     render :layout=> 'application'
   end
 
 
