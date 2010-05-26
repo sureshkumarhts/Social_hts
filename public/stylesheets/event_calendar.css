@@ -95,7 +95,8 @@
 }
 
 .ec-today-bg {
-  background-color: #ffffdd;
+/*  background-color: #ffffdd; */
+    background-color: #04B4AE;
 }
 
 .ec-row-table {
@@ -122,7 +123,8 @@ a.ec-day-link {
 }
 
 .ec-today-header {
-  background-color: #d7d7ba;
+  /* background-color: #d7d7ba; */
+background-color: #04B4AE;
 }
 
 .ec-weekend-day-header {

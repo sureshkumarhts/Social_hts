@@ -1,11 +1,15 @@
 <%= wiki_page_style %>
-<%#=@current_user.is_group_admin(@group)%>
+
+
 <h1><%=h @page.title %></h1>
  <% if !@current_user.nil? %>
-<%= wiki_page_info %>
+<%#= wiki_page_info %>
+<%@group = Group.find(params[:id])%>
+<%if  @current_user.is_group_admin(@group)%>
 <%= wiki_page_actions %>
 <%end%>
- 
+<%end%>
+
 <div class="wiki_content">
   <%=wiki_content @page.content %>
 </div>

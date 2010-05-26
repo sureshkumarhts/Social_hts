@@ -25,7 +25,7 @@ render_tabnav :main,
   #  end
   #end
 
-  if params[:action] != 'index'
+  
     add_tab do |t|
       if @group.nil?
         t.named 'OverView'
@@ -79,7 +79,10 @@ render_tabnav :main,
         t.links_to :controller => 'groups'
       else
         t.named 'Others'
+        #if params[:controller] == 'groups' and params[:controller] == 'calendar'
         t.links_to :controller => 'groups', :action => 'group_others', :group_id => @group
+        
+        #end
       end
     end
 
@@ -94,27 +97,7 @@ render_tabnav :main,
         end
       end
     end
-  else
-
-    add_tab do |t|
-      t.named 'Group Directory'
-      t.links_to :controller => 'groups', :action => 'index'
-    end
-
-
-    if logged_in?
-      add_tab do |t|
-       
-          t.named 'my groups'
-          t.links_to user_groups_path(current_user)
-       
-      end
-    end
-
-
-
-
-  end
+ 
 end
 
 

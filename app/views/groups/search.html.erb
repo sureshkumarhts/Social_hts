@@ -8,16 +8,20 @@
 <table width="700px" >
 <tr>
 <td>
-<span class="group_title">Groups</span>
+  <div id="content_table">
+    <div>
+<span class="group_title">Group's</span>
 	<% for group in @groups %>
 		<%= render :partial => 'group_brief', :locals=>{:group=>group} %>
 	<% end %> <br/>
 	<% if @groups.length == 0 %>
 		No groups exist.
-	<% end %>
+	<% end %> </div>
 
-<div id="content_table">
-<span class="group_title">Forums</span>
+
+
+                
+    <div style="margin-right: 1300px;"><span class="group_title" >Forum's</span></div>
 <div id="forum_table" style="padding-left: 1px;">
   <% if @forums.length != 0 %>
 	<div id="topic_header">
@@ -26,7 +30,7 @@
 		<div class="topic_posts">Posts</div>
 		<div class="topic_last_post">Last Post</div>
 	</div>
-  
+
 	<% @forums.each do |topic| %>
 		<div class="a_topic">
 			<div class="topic_title"><%= link_to topic.title, forum_topic_forum_posts_path(topic) %></div><br/>
@@ -49,22 +53,20 @@
 		No topics exist.
 	<% end %>
 </div>
-
-<br>
-<span class="group_title">Events</span>
+               <div>
+<span class="group_title">Event's</span>
 	<% for event in @events %>
 		<%= render :partial => '/events/event_brief', :locals=>{:event=>event} %>
 	<% end %><br>
-	<% if @events.length == 0 %>
+	<% if @events.length == 0 %><br>
 		No Events exist.
 	<% end %>
+</div>
 <br>
-
-<span class="group_title">Wiki</span>
-
-<%= wiki_page_style %>
+                 <span class="group_title">Wiki's</span>
+                 <%#= wiki_page_style %>
 <% for wiki in @wiki %>
-<h1><%=h wiki.title %></h1>
+<h1> Title : <%=h wiki.title %></h1>
 
 <div class="wiki_content">
   <%=wiki_content wiki.content %>
@@ -73,7 +75,10 @@
 <% if @wiki.length == 0 %>
 		No Wiki exist.
 	<% end %>
+
 </div>
+
+
 
 </td>
 </tr>

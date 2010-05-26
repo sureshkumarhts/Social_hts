@@ -102,7 +102,7 @@ class GroupsController < ApplicationController
       @user = current_user
       @groups_id = @user.groups
     else
-      @groups_id = Group.find(:all)
+      @groups_id = Group.find(:all, :conditions => ['private =? ', 0])
     end
     @groups = Group.paginate :per_page => 20, :page => params[:page], :conditions => ['groups.name LIKE ? AND id in (?)',@params , @groups_id.collect{|x|x.id}]
     @events = Event.paginate :per_page => 20, :page => params[:page], :include => [ :group], :conditions => ['events.name LIKE ? AND group_id in (?)',@params , @groups_id.collect{|x|x.id}]
@@ -161,6 +161,10 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:group_id])
   end
 
+
+  def calendar
+    
+  end
   def show
     @group = Group.find(params[:id])
     #self.id = @group

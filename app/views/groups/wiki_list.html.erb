@@ -3,8 +3,8 @@
 <%= stylesheet_link_tag 'groups' %>
 
 
-<h1>List Of Wiki Pages in <%=@group.name%></h1>
-<div id="add_group">
+<h1>Wiki's in <%=@group.name%></h1>
+<div id="add_groups">
   <%if @wiki.length != 0  %>
 	<%for wiki in @wiki%>
           <%= link_to "#{wiki.title}", :controller => "wiki/#{@group.id}/#{wiki.path}"   %><br>
@@ -13,10 +13,10 @@
         <%else%>
           No Pages on this group
         <%end%>
-</div>
+</div> <br>
 
 <% if logged_in? && current_user.is_group_admin(@group) %>
-<%=link_to "Create new wiki ", {:controller => "wiki/#{@group.id}", :action => 'edit' }, :onclick => "TotalCheckedValues()" %>
+<%=link_to "CREATE NEW WIKI ", {:controller => "wiki/#{@group.id}", :action => 'edit' }, :onclick => "TotalCheckedValues()" %>
 <%end%>
 
 
