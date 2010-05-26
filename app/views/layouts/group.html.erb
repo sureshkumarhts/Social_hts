@@ -155,11 +155,11 @@ p#nav-utility-account-type{position:absolute;top:0;left:0;}
                     </ul></li>
 
                   <%elsif item.name == 'groups'%>
-                    <%if logged_in?%>
-                    <li> <%= link_to item.name.to_s.capitalize, user_groups_path(current_user), :class=>'menulink' %></li>
-                    <%else%>
+                    <%#if logged_in?%>
+                    <li> <%#= link_to item.name.to_s.capitalize, user_groups_path(current_user), :class=>'menulink' %></li>
+                    <%#else%>
                     <li> <%= link_to item.name.to_s.capitalize, groups_path, :class=>'menulink' %></li>
-                      <%end%>
+                      <%#end%>
                   <%elsif item.name == 'events'%>
                     <li> <%= link_to item.name.to_s.capitalize, events_path, :class=>'menulink' %></li>
                   <%elsif item.name == 'photos'%>
