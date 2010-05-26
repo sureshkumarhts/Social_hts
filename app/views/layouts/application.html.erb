@@ -142,7 +142,7 @@ p#nav-utility-account-type{position:absolute;top:0;left:0;}
                     <li> <%= link_to item.name.to_s.capitalize, blog_posts_path, :class=>'menulink' %>
                        <ul style="overflow: hidden; display: block; z-index: 67; opacity: 0.0208333; height: 0pt;">
                           <% if logged_in? %>
-                      		<li><%= link_to 'All Blog Posts' %></li>
+                      		<li><%= link_to 'All Blog Posts', blog_posts_path %></li>
 		<li><%= link_to 'My Blog', user_blog_posts_path(current_user) %></li>
 		<li><%= link_to 'Add a Blog Post', new_blog_post_path %></li>
                  <% end %>
@@ -220,17 +220,7 @@ p#nav-utility-account-type{position:absolute;top:0;left:0;}
   <td><img src="/images/bottom_red_bar.jpg" width="947" height="22"></td>
 </tr>
 <tr>
-  <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="2%">&nbsp;</td>
-        <td width="64%" align="left"><a href="#" class="footer_link">Main</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Members</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Blogs</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Groups</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Events</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Photos</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Classifieds</a> <span class="footer_link">|</span> <a href="#" class="footer_link">Forum</a></td>
-        <td width="32%" align="right" class="copyright_text">Copyright &copy; 2009, Ping.com. </td>
-        <td width="2%">&nbsp;</td>
-      </tr>
-      <tr>
-        <td height="10" colspan="4"></td>
-      </tr>
-    </table></td>
+  <td><%= render :partial => 'shared/footer' %></td>
 </tr>
 </table>
 <script type="text/javascript">
