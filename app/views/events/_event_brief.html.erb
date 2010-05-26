@@ -5,7 +5,7 @@
   </div>
   <div class="event_brief_photo">
     <% if event.profile_photo %>
-      <%if group_event%>
+      <%if group_event != ''%>
         <%= link_to image_tag(event.profile_photo.public_filename(:medium), :alt=>event.name),:controller => 'groups', :action => 'events', :event_id => event %>
       <%else%>
         <%= link_to image_tag(event.profile_photo.public_filename(:medium), :alt=>event.name), event_url(event) %>
@@ -15,8 +15,8 @@
     <% end %>
   </div>
   <div class="event_brief_text">
-    <%if group_event %>
-      <span id="event_name"><%= link_to event.name, {:controller => 'groups', :action => 'events', :group_id => group_event.id}, :onclick => "TotalChecked()"  %></span><br/>
+    <%if group_event != ''  %>
+      <span id="event_name"><%= link_to event.name, {:controller => 'groups', :action => 'events',  :event_id => event} %></span><br/>
     <%else%>
       <span id="event_name"><%= link_to event.name, event_url(event) %></span><br/>
     <%end%>

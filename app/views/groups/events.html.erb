@@ -4,9 +4,9 @@
 <table width="750px" >
   <tr>
     <td>
-      
+
       <%if !params[:group_id].nil? %>
-      <span class="group_title">Events</span><%=params[:event_id]%>
+        <span class="group_title">Events</span>
         <% for event in @group.events %>
           <%= render :partial => '/events/event_brief', :locals=>{:event=>event,  :group_event => @group } %>
         <% end %><br/>
@@ -14,14 +14,14 @@
           No Events exist.
         <% end %>
         <br/>
-      
-             <% if logged_in? %>
-             	<% if @group.users.include?(current_user) %><%= link_to 'Create New Events', :controller => 'groups', :action => 'events', :id => @group.id, :type=>'new'%>  <%end%>
 
-	      <%end%>
-          
+        <% if logged_in? %>
+          <% if @group.users.include?(current_user) %><%= link_to 'Create New Events', :controller => 'groups', :action => 'events', :id => @group.id, :type=>'new'%>  <%end%>
+
+        <%end%>
+
       <%elsif params[:event_id] and !params[:class]%>
-         <span class="group_title">Events</span><%=params[:event_id]%>
+        <span class="group_title">Events</span>
         <div id ="event_show">
 
           <div class="column_1">
@@ -42,23 +42,19 @@
             <%= render :partial => '/events/attendance_widget' %>
           </div>
         </div>
-        <%elsif params[:class] == 'edit'%>
-        
- <span class="group_title">Edit Events</span>
+      <%elsif params[:class] == 'edit'%>
 
-<div id="add_event">
-	<%= render :partial => 'events/event_form' %>
-	<div style="clear:both;"></div>
-        <%= link_to_function "Go back", "history.back()" %>
-</div>
-   <%elsif params[:type] == 'new'%>
-     <span class="group_title">Add Events</span>
-<div id="add_event">
-	<%= render :partial => 'events/event_form' %>
-</div>
-
-
-
+        <span class="group_title">Edit Events</span>
+        <div id="add_event">
+          <%= render :partial => 'events/event_form' %>
+          <div style="clear:both;"></div>
+          <%= link_to_function "Go back", "history.back()" %>
+        </div>
+      <%elsif params[:type] == 'new'%>
+        <span class="group_title">Add Events</span>
+        <div id="add_event">
+          <%= render :partial => 'events/event_form' %>
+        </div>
       <%end%>
     </td>
   </tr>
