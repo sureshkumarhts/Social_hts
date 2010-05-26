@@ -3,10 +3,10 @@
 
 
 <div >
-  <%# if (@group.profile_photo) %>
-    <%#= image_tag(@group.profile_photo.public_filename(), :width=>50 ,:height=> 50) %>
-  <%# else %>
+  <% if (@group.profile_photo) %>
+    <%= image_tag(@group.profile_photo.public_filename(), :width=>50 ,:height=> 50) %>
+  <% else %>
     No Photo
-  <%# end %>
+  <% end %>
 </div>
 
