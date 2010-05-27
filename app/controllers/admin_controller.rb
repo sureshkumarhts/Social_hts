@@ -224,8 +224,7 @@ class AdminController < ApplicationController
      def tab_update
        @tabs = params[:tab]
        @tabs.each do |key, value|
-         puts key
-         puts value
+
          tab = Tab.find(key)
          tab.update_attributes(:enable=> value)
        end
@@ -238,13 +237,44 @@ class AdminController < ApplicationController
     @forum_topic = ForumTopic.new
     render 'forum_topic_form'
   end
-  
+
+
+  def forum_topic_delete
+    @forum_topic = ForumTopic.find(params[:id])
+     @forum_topic.destroy
+    redirect_to '/admin/forums'
+  end
+
+  def forum_post_delete
+    @forum_post = ForumPost.find(params[:id])
+      @forum_post.destroy
+    redirect_to '/admin/forums'
+  end
+
+  def group_delete
+    @group = Group.find(params[:id])
+     @group.destroy
+    redirect_to '/admin/groups'
+  end
+
+  def event_delete
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to '/admin/events'
+
+  end
   
   def blog_post_edit
     @blog_post = BlogPost.find(params[:id])
     render 'blog_post_form'
   end
-  
+
+
+  def blog_post_delete
+    @blog_post = BlogPost.find(params[:id])
+    @blog_post.destroy
+    redirect_to '/admin/blog_posts'
+  end
   
   def group_new
     @group = Group.new
