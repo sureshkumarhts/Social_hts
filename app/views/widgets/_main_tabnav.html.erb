@@ -43,13 +43,8 @@ render_tabnav :main,
         t.links_to :controller => 'groups'
       else
         t.named 'Events'
-        if !@group.nil? and @event.nil?
-          t.links_to :controller => 'groups', :action => 'events', :group_id => @group
-        elsif !@group.nil? and !@event.nil?
-          t.links_to :controller => 'groups', :action => 'events', :group_id => @group
-        else
-        end
-      end
+         t.links_to :controller => 'groups', :action => 'events', :group_id => @group
+       end
     end
 
     add_tab do |t|

@@ -161,10 +161,12 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:group_id])
   end
 
-
-  def calendar
-    
+    def group_admin
+    @group = Group.find(params[:group_id])
   end
+
+
+
   def show
     @group = Group.find(params[:id])
     #self.id = @group

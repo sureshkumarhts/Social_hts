@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'group_forums', :controller=>'groups', :action=>'forums'
   map.connect 'group_members', :controller=>'groups', :action=>'group_members'
   map.connect 'group_others', :controller=>'groups', :action=>'group_others'
+  map.connect 'group_admin', :controller=>'groups', :action=>'group_admin'
   map.connect 'memberships/find', :controller=>'memberships', :action=>'find'
   map.connect 'users/change_photo', :controller=>'users', :action=>'change_photo'
   map.connect 'groups/user_data', :controller=>'groups', :action=>'user_data'
